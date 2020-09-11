@@ -1,14 +1,14 @@
 {
 
-  "description": "",
+  "description": "Chrome extension to save websites url / title / description in your account on https://my-dev-tools-links.herokuapp.com",
   "manifest_version": 2,
-  "name": "",
+  "name": "Dev Tools Saver",
   "version": "0.0.0.1",
-  "homepage_url": "",
+  "homepage_url": "https://my-dev-tools-links.herokuapp.com",
   "icons": {
     "48": "icons/icon48.png"
   },
-  
+
     "background": {
     "scripts": ["background.js"]
   },
