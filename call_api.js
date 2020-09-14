@@ -5,27 +5,36 @@ const url = window.location["href"];
 
 console.log(url);
 
-const description = document.querySelector('meta[name="description"]').content;
+let description = "";
+if (document.querySelector('meta[name="description"]') == null) {
+  description = "This website has no description yet."
+} else {
+  description = document.querySelector('meta[name="description"]').content;
+}
+
+
 console.log(description);
 
 
+const createResource = (apiKey) => {
+  fetch("http://localhost:3000/api/v1/resources", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-User_Email": "riri@gmail.com",
+      "X-User-Token": apiKey,
+    },
+    body: JSON.stringify({ resource:{ title: title, description: description, url: url } })
+  })
+    .then(response => response.json())
+    .then((data) => {
+      console.log(data);
+    });
+};
+
+createResource(apiKey);
 
 
-// const createResource = () => {
-//   fetch("http://localhost:3000/api/v1/resources", {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//       "X-User_Email": "riri@gmail.com",
-//       "X-User-Token": apiKey,
-//     },
-//     body: JSON.stringify({ resource:{ title: title, description: description, url: url } })
-//   })
-//     .then(response => response.json())
-//     .then((data) => {
-//       console.log(data); // Look at local_names.default
-//     });
-// };
 
-// createResource();
+
 

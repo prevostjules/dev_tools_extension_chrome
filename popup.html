@@ -6,18 +6,22 @@
   </head>
   <body>
     <h1>Dev Tools Saver</h1>
+    <div id="get-api-key">
+      <form action="" method="get" class="form-example">
+        <div class="form-example">
+          <label for="api-key">Enter your api-key: </label>
+          <input type="password" name="api-key" id="api-key" required>
+        </div>
+        <div class="form-example">
+          <input id="submit_api_key" type="submit" value="Save Api Key">
+        </div>
+      </form>
+    </div>
 
-    <form action="" method="get" class="form-example">
-      <div class="form-example">
-        <label for="api-key">Enter your api-key: </label>
-        <input type="password" name="api-key" id="api-key" required>
-      </div>
-      <div class="form-example">
-        <input id="submit_api_key" type="submit" value="Save this website">
-      </div>
-    </form>
+    <div id="success"></div>
 
-<!--     <button id="call_api">test</button> -->
-    <script src="background.js"></script>
+
+    <button id="call_api">Call Api</button>
+    <script src="popup.js"></script>
   </body>
 </html>
