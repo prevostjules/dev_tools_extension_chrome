@@ -1,8 +1,8 @@
-chrome.browserAction.onClicked.addListener(function(tab) {
+document.addEventListener("DOMContentLoaded", () => {
+ var button = document.getElementById("call_api")
 
-	chrome.tabs.executeScript({
-	  code: ''
-	});
+ button.addEventListener("click", (e) => {
+   chrome.tabs.executeScript({ file: "call_api.js" })
+ })
 
-
-});
+})
