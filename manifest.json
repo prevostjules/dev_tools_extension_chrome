@@ -1,8 +1,8 @@
 {
  "manifest_version": 2,
- "name": "Sample Name",
+ "name": "Dev Tools Saver",
  "version": "1.0.0",
- "description": "This is a sample description",
+ "description": "Chrome extension to save websites url / title / description in your account on https://my-dev-tools-links.herokuapp.com",
  "short_name": "Short Sample Name",
  "permissions": ["activeTab", "declarativeContent", "storage", "<all_urls>"],
  "content_scripts": [
@@ -13,7 +13,7 @@
    }
  ],
  "browser_action": {
-   "default_title": "Does a thing when you do a thing",
+   "default_title": "Dev Tools Saver",
    "default_popup": "popup.html"
  }
 }
