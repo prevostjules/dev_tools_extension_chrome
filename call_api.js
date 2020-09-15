@@ -19,7 +19,7 @@
 
 
 const createResource = () => {
-  fetch("http://localhost:3000/api/v1/resources", {
+  fetch("https://my-dev-tools-links.herokuapp.com/api/v1/resources", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
