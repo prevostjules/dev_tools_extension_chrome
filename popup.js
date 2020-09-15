@@ -118,7 +118,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     submitInfosBtn.style.display = "none";
     const success = document.getElementById("success");
     success.style.display = "block";
-    success.insertAdjacentHTML("beforeend", `<p>Hurra ! You can now find "${message.message.title}" on Dev Tools</p>`);
+    success.insertAdjacentHTML("beforeend", `<p>Hurra ! You can now find "${message.message.title}" on <a href="https://my-dev-tools-links.herokuapp.com/resources" target="_blank">Dev Tools</a> and modify it by clicking <a href="https://my-dev-tools-links.herokuapp.com/resources/${message.message.id}/edit" target="_blank">here</a>.</p>`);
   } else {
     checkApiKey();
   }

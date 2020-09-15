@@ -11,7 +11,7 @@ const createResource = () => {
     .then(response => response.json())
     .then((data) => {
       console.log(data);
-      // chrome.runtime.sendMessage({message: data, type: 'from_call_api'})
+      chrome.runtime.sendMessage({message: data, type: 'from_call_api'})
     });
 };
 
