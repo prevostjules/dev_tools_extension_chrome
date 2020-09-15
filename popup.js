@@ -1,11 +1,20 @@
 function checkApiKey() {
 
-  // Check that there's some code there.
   chrome.storage.local.get(['apiKey'], function(result) {
       if (result.apiKey != null) {
-        const getApiKey = document.getElementById("get-api-key");
-        getApiKey.style.display = "none";
-        callApi(result.apiKey);
+        let apiKey = result.apiKey;
+        chrome.storage.local.get(['email'], function(result) {
+          if (result.email != null) {
+            const getApiKey = document.getElementById("get-api-key");
+            getApiKey.style.display = "none";
+            const credentials = { apiKey: apiKey, email: result.email }
+            callApi(credentials);
+          } else {
+            const btnApiKey = document.getElementById("call_api");
+            btnApiKey.style.display = "none";
+            saveApiKey();
+          }
+        });
 
       } else {
         const btnApiKey = document.getElementById("call_api");
@@ -21,20 +30,21 @@ checkApiKey();
 const saveApiKey = () => {
   const submitApiKey = document.getElementById("submit_api_key");
   submitApiKey.addEventListener("click", (e) => {
-    const apiKey = document.getElementById("api-key").value;
-    chrome.storage.local.set({apiKey: apiKey}, function() {
-      callApi(apiKey);
+    let apiKey = document.getElementById("api-key").value;
+    let email = document.getElementById("email").value;
+    let credentials = { apiKey: apiKey, email: email };
+    chrome.storage.local.set(credentials, function() {
     });
+    callApi(credentials);
   })
 
 }
 
-const callApi = (apiKey) => {
+const callApi = (credentials) => {
   const btnApiKey = document.getElementById("call_api");
-
   btnApiKey.addEventListener("click", (e) => {
     chrome.tabs.executeScript(
-     { code: "var apiKey = " + JSON.stringify(apiKey) },
+     { code: "var apiKey = " + JSON.stringify(credentials) },
      function() {
       chrome.tabs.executeScript({ file: "call_api.js" })
      })

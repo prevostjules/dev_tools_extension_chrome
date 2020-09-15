@@ -16,12 +16,12 @@ if (document.querySelector('meta[name="description"]') == null) {
 console.log(description);
 
 
-const createResource = (apiKey) => {
+const createResource = (apiKey, email) => {
   fetch("http://localhost:3000/api/v1/resources", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "X-User_Email": "riri@gmail.com",
+      "X-User_Email": email,
       "X-User-Token": apiKey,
     },
     body: JSON.stringify({ resource:{ title: title, description: description, url: url } })
@@ -32,7 +32,7 @@ const createResource = (apiKey) => {
     });
 };
 
-createResource(apiKey);
+createResource(apiKey.apiKey, apiKey.email);
 
 
 
