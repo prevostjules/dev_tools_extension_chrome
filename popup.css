@@ -1,14 +1,19 @@
-body {
+.dev-tools-extension {
   text-align: center;
   padding: 0.5rem;
+  background-color: #F4F4F4;
+  color: #919FB5;
+  margin: 0;
 }
 
-p {
+.dev-tools-extension p {
   margin: 0.5rem;
 }
 
-form, label, .form-example {
-  margin: 1rem;
+.dev-tools-extension form, .dev-tools-extension input, .dev-tools-extension .form-example {
+  margin: 0.4rem;
 }
 
-
+.dev-tools-extension .hide {
+  opacity: 0;
+}
