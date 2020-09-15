@@ -1,30 +1,32 @@
-const title = document.querySelector("title").innerHTML;
-console.log(title);
+// let title = document.querySelector("title").innerHTML;
+// console.log(title);
 
-const url = window.location["href"];
+// let url = window.location["href"];
 
-console.log(url);
+// console.log(url);
 
-let description = "";
-if (document.querySelector('meta[name="description"]') == null) {
-  description = "This website has no description yet."
-} else {
-  description = document.querySelector('meta[name="description"]').content;
-}
+// let description = "";
+// if (document.querySelector('meta[name="description"]') == null) {
+//   description = "This website has no description yet."
+// } else {
+//   description = document.querySelector('meta[name="description"]').content;
+// }
+
+// console.log(description);
+
+// websiteInfos = {title: title, url: url, description: description};
+// chrome.runtime.sendMessage({message: websiteInfos, type: 'website_infos'})
 
 
-console.log(description);
-
-
-const createResource = (apiKey, email) => {
+const createResource = () => {
   fetch("http://localhost:3000/api/v1/resources", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "X-User_Email": email,
-      "X-User-Token": apiKey,
+      "X-User_Email": resourceInfos.credentials.email,
+      "X-User-Token": resourceInfos.credentials.apiKey,
     },
-    body: JSON.stringify({ resource:{ title: title, description: description, url: url } })
+    body: JSON.stringify({ resource:{ title: resourceInfos.title, description: resourceInfos.description, url: resourceInfos.url } })
   })
     .then(response => response.json())
     .then((data) => {
@@ -33,7 +35,8 @@ const createResource = (apiKey, email) => {
     });
 };
 
-createResource(apiKey.apiKey, apiKey.email);
+
+createResource();
 
 
 
