@@ -4,8 +4,8 @@ let url = window.location["href"];
 
 let imgUrl = "";
 
-if (document.querySelector('meta[property="og:image"]').content == null) {
-  imgUrl = ""
+if (document.querySelector('meta[property="og:image"]') == null) {
+  imgUrl = null;
 } else {
   imgUrl = document.querySelector('meta[property="og:image"]').content;
 }
