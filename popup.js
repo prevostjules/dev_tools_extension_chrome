@@ -25,7 +25,10 @@ function checkApiKey() {
   });
 }
 
-checkApiKey();
+document.addEventListener("DOMContentLoaded", () => {
+  checkApiKey();
+});
+
 
 const saveApiKey = () => {
   const submitApiKey = document.getElementById("submit_api_key");
@@ -48,15 +51,34 @@ const callApi = (credentials) => {
      function() {
       chrome.tabs.executeScript({ file: "call_api.js" })
      })
-    btnApiKey.style.display = "none";
-    const success = document.getElementById("success");
-    success.insertAdjacentHTML("beforeend", `<p>Hurra ! You can now find the website on Dev Tools</p><p>It didn't work ? Try to <a id="change-api-key" href="#">change your API Key</a>`)
-    const changeApiKey = document.getElementById("change-api-key");
-    changeApiKey.addEventListener("click", (e) => {
-      success.style.display = "none";
-      const getApiKey = document.getElementById("get-api-key");
-      getApiKey.style.display = "block";
-    })
+
+    chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+      if (message.type === 'from_call_api' && "errors" in message.message) {
+        console.log(message.message.errors);
+        const errors = message.message.errors
+        btnApiKey.style.display = "none";
+        const fail = document.getElementById("fail");
+        fail.innerHTML = "";
+        fail.insertAdjacentHTML("beforeend", `Errors :`)
+        errors.forEach((error) => {
+          fail.insertAdjacentHTML("beforeend", `<p>- ${error}</p>`);
+        });
+
+      } else if (message.type === 'from_call_api' && "error" in message.message) {
+        btnApiKey.style.display = "none";
+        const getApiKey = document.getElementById("get-api-key");
+        getApiKey.style.display = "block";
+        const fail = document.getElementById("fail");
+        fail.innerHTML = "";
+        fail.insertAdjacentHTML("beforeend", `<p>Invalid email or API Key, please try again.</p>`)
+        saveApiKey();
+      } else {
+        console.log(message.message);
+        btnApiKey.style.display = "none";
+        const success = document.getElementById("success");
+        success.insertAdjacentHTML("beforeend", `<p>Hurra ! You can now find "${message.message.title}" on Dev Tools</p>`);
+      }
+    });
  })
 
 }

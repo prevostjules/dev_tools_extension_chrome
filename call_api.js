@@ -29,6 +29,7 @@ const createResource = (apiKey, email) => {
     .then(response => response.json())
     .then((data) => {
       console.log(data);
+      chrome.runtime.sendMessage({message: data, type: 'from_call_api'})
     });
 };
 
