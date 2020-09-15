@@ -54,7 +54,7 @@ const callApi = (credentials) => {
   chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       if (message.type === 'website_infos') {
         document.getElementById("call_api_div").classList.add("hide");
-        let websiteInfos = { title: message.message.title, description: message.message.description, url: message.message.url }
+        let websiteInfos = { title: message.message.title, description: message.message.description, url: message.message.url, imgUrl: message.message.imgUrl }
         const validInfos = document.getElementById("valid-infos");
         validInfos.style.display = "block";
         const titleInput = document.getElementById("title");
@@ -63,13 +63,16 @@ const callApi = (credentials) => {
         descriptionInput.value = websiteInfos.description;
         const urlInput = document.getElementById("url");
         urlInput.value = websiteInfos.url;
+        const imgUrlInput = document.getElementById("img-url");
+        imgUrlInput.value = websiteInfos.imgUrl;
         const submitInfosBtn = document.getElementById("submit-infos");
         submitInfosBtn.addEventListener("click", (e) => {
           const titleUser = titleInput.value;
           const descriptionUser = descriptionInput.value;
           const urlUser = urlInput.value;
+          const imgUrlUser = imgUrlInput.value;
 
-          let resourceInfos = { credentials: credentials, title: titleUser, description: descriptionUser, url: urlUser }
+          let resourceInfos = { credentials: credentials, title: titleUser, description: descriptionUser, url: urlUser, imgUrl: imgUrlUser }
 
           chrome.tabs.executeScript(
              { code: "var resourceInfos = " + JSON.stringify(resourceInfos) },
