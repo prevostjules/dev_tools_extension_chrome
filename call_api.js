@@ -16,7 +16,7 @@ const createResource = () => {
 };
 
 
-createResource();
+export { createResource };
 
 
 
