@@ -1,4 +1,4 @@
-const createResource = () => {
+const createResource = (resourceInfos) => {
   fetch("https://my-dev-tools-links.herokuapp.com/api/v1/resources", {
     method: "POST",
     headers: {
@@ -15,8 +15,7 @@ const createResource = () => {
     });
 };
 
-
-export { createResource };
+createResource(resourceInfos);
 
 
 
