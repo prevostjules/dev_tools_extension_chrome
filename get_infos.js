@@ -1,7 +1,5 @@
 let title = document.querySelector("title").innerHTML;
-
 let url = window.location["href"];
-
 let imgUrl = "";
 
 if (document.querySelector('meta[property="og:image"]') == null) {
@@ -17,5 +15,5 @@ if (document.querySelector('meta[name="description"]') == null) {
   description = document.querySelector('meta[name="description"]').content;
 }
 
-websiteInfos = {title: title, url: url, description: description, imgUrl: imgUrl};
+let websiteInfos = {title: title, url: url, description: description, imgUrl: imgUrl};
 chrome.runtime.sendMessage({message: websiteInfos, type: 'website_infos'})
